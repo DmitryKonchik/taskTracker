@@ -9,7 +9,6 @@ import by.tms.tasktracker.repository.TaskRepository;
 import by.tms.tasktracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionUsageException;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

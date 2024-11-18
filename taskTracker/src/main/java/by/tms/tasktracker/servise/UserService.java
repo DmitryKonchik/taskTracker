@@ -2,33 +2,36 @@ package by.tms.tasktracker.servise;
 import by.tms.tasktracker.dto.UserLoginDto;
 import by.tms.tasktracker.dto.UserRegistrationDto;
 import by.tms.tasktracker.entity.User;
+import by.tms.tasktracker.entity.UserRole;
 import by.tms.tasktracker.exeption.UserNotFoundException;
 import by.tms.tasktracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements UserDetailsService {
-    private final UserRepository userRepository;
-
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public UserRegistrationDto register(UserRegistrationDto userRegistrationDto) {
         User user = new User();
         user.setName(userRegistrationDto.getName());
         user.setEmail(userRegistrationDto.getEmail());
-        user.setPassword(userRegistrationDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         user.setUsername(userRegistrationDto.getUsername());
+        user.setRoles(Set.of(UserRole.PERFORMER));
         userRepository.save(user);
         return userRegistrationDto;
     }
@@ -47,7 +50,7 @@ public class UserService implements UserDetailsService {
         newUser.setEmail(user.getEmail());
         newUser.setPassword(user.getPassword());
         newUser.setUsername(user.getUsername());
-        newUser.setRole(user.getRole());
+        newUser.setRoles(user.getRoles());
         return userRepository.save(newUser);
     }
 

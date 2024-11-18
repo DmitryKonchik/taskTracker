@@ -2,10 +2,12 @@ package by.tms.tasktracker.controller;
 
 import by.tms.tasktracker.entity.Task;
 import by.tms.tasktracker.entity.TaskStatus;
+import by.tms.tasktracker.entity.User;
 import by.tms.tasktracker.servise.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +42,8 @@ public class TaskController {
     }
 
     @PostMapping("/{userId}")
-    public ResponseEntity<Task> createTask(@RequestBody Task task, @PathVariable Long userId) {
+    public ResponseEntity<Task> createTask(@RequestBody Task task, @PathVariable Long userId, @AuthenticationPrincipal User user) {
+
         return ResponseEntity.ok(taskService.createTask(task, userId));
     }
 

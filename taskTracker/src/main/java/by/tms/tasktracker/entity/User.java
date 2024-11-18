@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,11 +23,14 @@ public class User implements UserDetails {
 
     private String username;
     private String name;
+    @JsonIgnore
     private String password;
     private String email;
 
+
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<UserRole> roles;
 
     @JsonIgnore
     @OneToMany(mappedBy = "assignedTo", cascade = CascadeType.ALL)
@@ -38,7 +42,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return roles;
     }
 
     @Override
