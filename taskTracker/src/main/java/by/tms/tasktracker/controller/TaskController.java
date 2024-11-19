@@ -72,6 +72,5 @@ public class TaskController {
         taskService.deleteTaskById(taskId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
 }
 

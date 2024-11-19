@@ -3,7 +3,6 @@ package by.tms.tasktracker.config;
 
 import by.tms.tasktracker.filter.JwtRequestFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,13 +31,11 @@ public class SecurityConfig {
 
 
     private final ObjectMapper objectMapper;
-    private final SecurityProperties restSecProps;
     private final JwtRequestFilter jwtRequestFilter;
 
 
-    public SecurityConfig(ObjectMapper objectMapper, SecurityProperties restSecProps, JwtRequestFilter jwtRequestFilter) {
+    public SecurityConfig(ObjectMapper objectMapper, JwtRequestFilter jwtRequestFilter) {
         this.objectMapper = objectMapper;
-        this.restSecProps = restSecProps;
         this.jwtRequestFilter = jwtRequestFilter;
     }
 

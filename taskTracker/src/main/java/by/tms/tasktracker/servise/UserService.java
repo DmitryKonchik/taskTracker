@@ -36,13 +36,6 @@ public class UserService implements UserDetailsService {
         return userRegistrationDto;
     }
 
-    public User login(UserLoginDto userLoginDto) {
-        User user = userRepository.findByUsername(userLoginDto.getUsername()).orElseThrow(() -> new UserNotFoundException("User not found"));
-        if (!user.getPassword().equals(userLoginDto.getPassword())) {
-            throw new RuntimeException("Wrong password");
-        }
-        else return user;
-    }
 
     public User updateUser (Long userId, User user) {
         User newUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -73,10 +66,7 @@ public class UserService implements UserDetailsService {
         }
         throw new UsernameNotFoundException(username);
     }
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return (UserDetails) userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Not found"));
-//    }
+
 }
 
 
