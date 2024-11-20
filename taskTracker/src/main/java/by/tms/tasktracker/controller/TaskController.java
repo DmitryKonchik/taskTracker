@@ -43,7 +43,8 @@ public class TaskController {
 
     @PostMapping("/{userId}")
     public ResponseEntity<Task> createTask(@RequestBody Task task, @PathVariable Long userId, @AuthenticationPrincipal User user) {
-
+       //ToDo
+        task.getWatchers().add(user);
         return ResponseEntity.ok(taskService.createTask(task, userId));
     }
 

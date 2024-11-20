@@ -3,8 +3,6 @@ package by.tms.tasktracker.controller;
 import by.tms.tasktracker.dto.UserLoginDto;
 import by.tms.tasktracker.security.JwtUtil;
 import by.tms.tasktracker.servise.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
